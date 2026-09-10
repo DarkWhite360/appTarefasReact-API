@@ -1,0 +1,16 @@
+{
+  "name": "api-tarefas",
+  "version": "1.0.0",
+  "description": "API gerenciador de tarefas - Persistência em JSON",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Antonio Branco",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1"
+  }
+}

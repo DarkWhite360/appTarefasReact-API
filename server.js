@@ -1,0 +1,170 @@
+require('dotenv').config();
+
+const express = require("express");
+const cors = require("cors");
+
+const app = new express();
+const tarefaRoutes = require("./src/routes/tarefaRoutes.js")
+const responsavelRoutes = require("./src/routes/responsavelRoutes.js")
+
+app.use(express.json());
+app.use(cors());
+
+app.use("/tarefas", tarefaRoutes);
+app.use("/responsaveis", responsavelRoutes);
+
+app.get("/", (req, res)=> {
+    res.status(200).json({
+        mensagem: "Rota Inicial"
+    });
+});
+f
+app.use((req, res)=> {
+    res.status(404).json({
+        erro: "Essa rota não existe!!!"
+    })
+})
+
+const port = process.env.PORT || 5000;
+
+if (process.env.NODE_ENV !== "production") {
+    app.listen(port, ()=> {
+        console.log(`Servido rodando no link: http://localhost:${port}`);
+    });
+}
+
+module.export = app;
+
+/*
+const dbTarefa = require("./mook/BaseTarefas.js");
+
+app.get("/tarefas", (req, res) => {
+    if (dbTarefa.length > 0) {
+        res.status(200).json(dbTarefa);
+    } else {
+        res.status(404).json({
+            mensagem: "Lista de Tarefas está vazia!!"
+        });
+    }
+});
+
+app.get("/tarefa/:id", (req, res) => {
+    const idBusca = Number(req.params.id);
+
+    if (isNaN(idBusca)) {
+        return res.status(400).json({
+            erro: "ID inválido"
+        })
+    }
+    const tarefa = dbTarefa.find((item) => item.id === idBusca);
+
+    if (!tarefa)
+        return res.status(404).json({
+            idBusca: idBusca,
+            erro: "Tarefa não encontrada"
+        });
+
+    return res.status(200).json({
+        idBusca: idBusca,
+        tarefa
+    });
+});
+
+app.post("/tarefa", (req, res) => {
+
+    const { titulo, descricao, responsavel } = req.body;
+
+    if (!titulo || !descricao || !responsavel) {
+        return res.status(400).json({
+            erro: "Todos os campos são obrigatórios!!!"
+        })
+    }
+    const dataAtual = new Date().toISOString().split('T')[0];
+    const novoId = dbTarefa.length > 0 ? dbTarefa[dbTarefa.length - 1].id + 1 : 1;
+
+    const novaTarefa = {
+        id: novoId,
+        titulo,
+        descricao,
+        status: 'EM_ANDAMENTO',
+        responsavel: {
+            id: responsavel?.id || (novoId + 10),
+            nome: responsavel?.nome || 'Não atribuido',
+            data_criacao: dataAtual,
+            data_atualizacao: dataAtual
+        },
+        data_criacao: dataAtual,
+        data_atualizacao: dataAtual
+    }
+
+    dbTarefa.push(novaTarefa);
+    return res.status(201).json({
+        menssage: 'Tarefa criada com sucesso!!!',
+        tarefa: novaTarefa
+    })
+});
+
+app.put("/tarefa/:id", (req, res)=>{
+
+    const id = Number(req.params.id);
+
+    if(isNaN(id)){
+        return res.status(400).json({
+            erro: "ID inválido !!!"
+        })
+    }
+
+    const index = dbTarefa.findIndex(t=> t.id === id);
+
+    if (index === -1){
+        return res.status(404).json({
+            erro: "tarefa não encontrada !!!"
+        })
+    }
+    const {titulo, descricao, status, responsavel} = req.body;
+    const dataAtual = new Date().toISOString().split('T')[0];
+
+    dbTarefa[index] = {
+        ...dbTarefa[index],
+        titulo: titulo || dbTarefa[index].titulo,
+        descricao: descricao || dbTarefa[index].descricao,
+        status: status || dbTarefa[index].status,
+        responsavel: responsavel ? {
+            ...dbTarefa[index].responsavel,
+            ...responsavel,
+            data_atualizacao: dataAtual
+        } : dbTarefa[index].responsavel,
+        data_atualizacao: dataAtual
+    }
+    return res.status(200).json({
+        mensagem: "Tarefa Atualizada com sucesso",
+        tarefa: dbTarefa[index]
+    })
+})
+
+app.delete("/tarefa/:id", (req, res)=>{
+    
+    const id = Number(req.params.id);
+
+    if(isNaN(id)){
+        return res.status(400).json({
+            erro: "ID inválido !!!"
+        })
+    }
+    
+    const index = dbTarefa.findIndex(t=> t.id === id);
+
+    if (index === -1){
+        return res.status(404).json({
+            erro: "tarefa não encontrada !!!"
+        })
+    }
+
+    const tarefaRemovida = dbTarefa.splice(index, 1);
+
+    return res.status(200).json({
+        mensagem: "Tarefa deletada com suesso!!!",
+        tarefaRemovida : tarefaRemovida 
+    })
+})
+*/
