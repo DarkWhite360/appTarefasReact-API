@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require("express");
 const cors = require("cors");
 
+const {sequelize} = require ("./src/models/index.js");
 const app = new express();
 const tarefaRoutes = require("./src/routes/tarefaRoutes.js")
 const responsavelRoutes = require("./src/routes/responsavelRoutes.js")
@@ -27,12 +28,28 @@ app.use((req, res)=> {
 
 const port = process.env.PORT || 5000;
 
-if (process.env.NODE_ENV !== "production") {
-    app.listen(port, ()=> {
-        console.log(`Servido rodando no link: http://localhost:${port}`);
-    });
+async function iniciarServidor(){
+    try{
+        await sequelize.authenticate()
+        console.log("Conexão com o banco de dados estabelecida com sucesso.");
+        
+        await sequelize();
+        // await sequelize({alter: true});
+        // await sequelize({force: true});
+
+        console.log("Tabelas sincronizadas com sucesso.");
+        if (process.env.NODE_ENV !== "production") {
+            app.listen(port, ()=> {
+                console.log(`Servido rodando no link: http://localhost:${port}`);
+            });
+        }
+        
+    } catch(error){
+        console.log("Não foi possível conectar ao banco de dados", error)
+    }
 }
 
+iniciarServidor();
 module.export = app;
 
 /*
