@@ -12,8 +12,20 @@ module.exports = (sequelize)=> {
                 type: DataTypes.STRING(150),
                 allowNull: false
             },
+            email:{
+                type: DataTypes.STRING(150),
+                allowNull: true
+            },
             telefone:{
                 type: DataTypes.STRING(20),
+                allowNull: true
+            },
+            senha:{
+                type: DataTypes.STRING(100),
+                allowNull: true 
+            },
+            foto:{
+                type: DataTypes.STRING,
                 allowNull: true
             },
             /*data_criacao:{
