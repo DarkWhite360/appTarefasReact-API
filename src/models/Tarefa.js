@@ -3,11 +3,11 @@ const {DataTypes} = require('sequelize');
 module.exports = (sequelize)=> {
     return sequelize.define("Tarefa",
         {
-            id:{
+            /*id:{
                 type: DataTypes.INTEGER,
                 primaryKey: true,
                 autoIncrement: true
-            },
+            },*/
             titulo:{
                 type: DataTypes.STRING(150),
                 allowNull: false
@@ -16,23 +16,28 @@ module.exports = (sequelize)=> {
                 type: DataTypes.TEXT,
                 allowNull: false
             },
+            preco: {
+                type: DataTypes.DECIMAL(10,2),
+                allowNull: true,
+                toDefaultValue: 0.00
+            },
             status:{
                 type: DataTypes.ENUM("PENDENTE", "EM_ANDAMENTO", "CONCLUIDO"),
                 allowNull: false,
-                defaultValue: 'PENDENTE'
+                toDefaultValue: 'PENDENTE'
             },
-            data_criacao:{
+            /*data_criacao:{
                 type: DataTypes.DATEONLY,
                 allowNull: false
             },
             data_atualizacao:{
                 type: DataTypes.DATEONLY,
                 allowNull: false
-            }
+            }*/
         },
         {
             tableName: "tarefas",
-            timestamps: false
+            timestamps: true
         }
     );
 };

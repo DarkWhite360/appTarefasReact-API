@@ -36,8 +36,8 @@ async function iniciarServidor(){
         console.log("Conexão com o banco de dados estabelecida com sucesso.");
         
         await sequelize.sync();
-        // await sequelize({alter: true});
-        // await sequelize({force: true});
+        //await sequelize.sync({alter: true});
+        //await sequelize.sync({force: true});
 
         console.log("Tabelas sincronizadas com sucesso.");
 
