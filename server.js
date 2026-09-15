@@ -3,10 +3,12 @@ require('dotenv').config();
 const express = require("express");
 const cors = require("cors");
 
-const {sequelize} = require ("./src/models/index.js");
-const app = new express();
 const tarefaRoutes = require("./src/routes/tarefaRoutes.js")
 const responsavelRoutes = require("./src/routes/responsavelRoutes.js")
+
+const {sequelize} = require ("./src/models/index.js");
+
+const app = new express();
 
 app.use(express.json());
 app.use(cors());
@@ -19,7 +21,7 @@ app.get("/", (req, res)=> {
         mensagem: "Rota Inicial"
     });
 });
-f
+
 app.use((req, res)=> {
     res.status(404).json({
         erro: "Essa rota não existe!!!"
@@ -33,11 +35,12 @@ async function iniciarServidor(){
         await sequelize.authenticate()
         console.log("Conexão com o banco de dados estabelecida com sucesso.");
         
-        await sequelize();
+        await sequelize.sync();
         // await sequelize({alter: true});
         // await sequelize({force: true});
 
         console.log("Tabelas sincronizadas com sucesso.");
+
         if (process.env.NODE_ENV !== "production") {
             app.listen(port, ()=> {
                 console.log(`Servido rodando no link: http://localhost:${port}`);

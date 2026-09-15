@@ -7,6 +7,6 @@ exports.listarResponsaveis=(req, res)=>{
     });
 }
 
-module.exports = {
+/*module.exports = {
     
-}
+}*/
