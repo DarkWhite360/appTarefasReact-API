@@ -28,6 +28,19 @@ module.exports = (sequelize)=> {
                 type: DataTypes.STRING,
                 allowNull: true
             },
+            cargo:{
+                type: DataTypes.ENUM("DEV_BACKEND", "DEV_FRONTEND", "MANAGER", "QA", "OUTRO"),
+                allowNull: false,
+                toDefault: 'OUTRO'
+            },
+            status:{
+                type: DataTypes.ENUM("ATIVO", "INATIVO"),
+                allowNull: false
+            },
+            departamento:{
+                type: DataTypes.ENUM("TI", "FINANCEIRO", "RH", "ADMINISTRATIVO", "OUTRO"),
+                allowNull: false
+            }
             /*data_criacao:{
                 type: DataTypes.DATEONLY,
                 allowNull: false
