@@ -1,5 +1,4 @@
 const {DataTypes} = require('sequelize');
-const Responsavel = require('./Responsavel');
 
 module.exports = (sequelize)=> {
     return sequelize.define("Tarefa",
