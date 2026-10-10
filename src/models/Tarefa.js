@@ -38,15 +38,6 @@ module.exports = (sequelize)=> {
                 allowNull: false,
                 toDefaultValue: 'PENDENTE'
             },
-
-            /*data_criacao:{
-                type: DataTypes.DATEONLY,
-                allowNull: false
-            },
-            data_atualizacao:{
-                type: DataTypes.DATEONLY,
-                allowNull: false
-            }*/
         },
         {
             tableName: "tarefas",
