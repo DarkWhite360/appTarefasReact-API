@@ -5,7 +5,7 @@ const{listarResponsaveis, buscarPorId, criarResponsavel, atualizarResponsavel, d
 
 router.get('/',listarResponsaveis);
 /*router.get('/:id',buscarPorId);
-router.get('/',criarResponsavel);
+router.post('/',criarResponsavel);
 router.get('/:id',atualizarResponsavel);
 router.get('/:id',deletarResponsavel);*/
 
