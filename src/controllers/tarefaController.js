@@ -60,9 +60,12 @@ exports.buscarPorId = async (req,res)=>{
 }
 
 exports.cadastrarTarefa = async(req,res)=>{
+    
+    
     try{
         const{titulo, descricao, observacao, preco, prioridade, dataLimite, status, id_responsavel} = req.body;
-
+        console.log(titulo, descricao, prioridade, id_responsavel, status )
+        
         if(!titulo || !descricao || !prioridade || !id_responsavel){
             return res.status(400).json({
                 mensagem: "Os campos [titulo, descricao, prioridade e responsável] são obrigatórios",
