@@ -14,7 +14,7 @@ module.exports = (sequelize)=> {
             },
             email:{
                 type: DataTypes.STRING(150),
-                allowNull: true
+                allowNull: false
             },
             telefone:{
                 type: DataTypes.STRING(20),
@@ -22,7 +22,7 @@ module.exports = (sequelize)=> {
             },
             senha:{
                 type: DataTypes.STRING(100),
-                allowNull: true 
+                allowNull: false 
             },
             foto:{
                 type: DataTypes.STRING,
@@ -30,16 +30,16 @@ module.exports = (sequelize)=> {
             },
             cargo:{
                 type: DataTypes.ENUM("DEV_BACKEND", "DEV_FRONTEND", "MANAGER", "QA", "OUTRO"),
-                allowNull: false,
+                allowNull: true,
                 toDefault: 'OUTRO'
             },
             status:{
                 type: DataTypes.ENUM("ATIVO", "INATIVO"),
-                allowNull: false
+                allowNull: true
             },
             departamento:{
                 type: DataTypes.ENUM("TI", "FINANCEIRO", "RH", "ADMINISTRATIVO", "OUTRO"),
-                allowNull: false
+                allowNull: true
             }
             /*data_criacao:{
                 type: DataTypes.DATEONLY,
