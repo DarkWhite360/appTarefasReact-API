@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const { Responsavel, Tarefa } = require("../models");
 
@@ -61,6 +62,7 @@ exports.criarResponsavel = async (req, res) => {
         return res.status(500).json({ mensagem: "Erro interno do servidor", erro: error.message });
     }
 }
+
 exports.login = async (req, res) => {
     try {
         const { email, senha } = req.body;
@@ -86,9 +88,27 @@ exports.login = async (req, res) => {
         }
         responsavel.senha = undefined;
 
+        /*---------------------GERAÇÃO DE TOKEN-------------------------------*/
+
+        const payload = {
+            id: responsavel.id,
+            nome: responsavel.nome,
+            email: responsavel.email,
+
+        }
+
+        const segredo = process.env.JWT_SECRET;
+
+        const opcao = {
+            expiresIn: process.env.JWT_EXPIRES_IN,
+        }
+
+        const token = jwt.sign(payload, segredo, opcao);
+
         return res.status(201).json({
             mensagem: "Login realizado com sucesso!",
-            responsavel: responsavel
+            responsavel: responsavel,
+            token: token
         });
         
     } catch (error) {
